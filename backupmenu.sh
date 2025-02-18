@@ -1,7 +1,12 @@
 #!/bin/bash
 
+user=$(whoami)
+backup_dir="/home/${user}/backup"
+
+
 while [ true ]
 do
+        echo ""
         echo "1.Do /home/$whoami folder backup "
         echo ""
         echo "2.Do only text file backup"
@@ -14,23 +19,23 @@ do
 
         case $choise in
                 1)
-                        if [[ ! -d "/home/$(whoami)/backup" ]]; then
-                                mkdir -p /home/$(whoami)/backup/
+                        if [[ ! -d "$backup_dir" ]]; then
+                                mkdir -p $backup_dir
                         fi
 
-                        tar -cvf /home/$(whoami)/backup/backup_$(date +%F-%H-%M-%S).tar --exclude="/home/$(whoami)/backup" /home/$(whoami)/
+                        tar -cvf $backup_dir/backup_$(date +%F-%H-%M-%S).tar --exclude="$backup_dir" /home/$(whoami)/
                         ;;
-                2) tar -cvf /home/$(whoami)/backup/backup_txt_$(date +%F-%H-%M-%S).tar --exclude="/home/$(whoami)/backup" /home/$(whoami)/*.txt
+                2) tar -cvf $backup_dir/backup_txt_$(date +%F-%H-%M-%S).tar --exclude="$backup_dir" /home/$(whoami)/*.txt
                         ;;
                 3)
                         while [ true ]
                         do
-                                ls -l  /home/$(whoami)/backup
+                                ls -l  $backup_dir
                                 echo "Write which file will you open "
                                 read file
-                                if [  -f "/home/$(whoami)/backup/$file" ]; then
+                                if [  -f "$backup_dir/$file" ]; then
                                 echo "File opened successfull"
-                                tar -xvf /home/$(whoami)/backup/$file -C "/home/$(whoami)"
+                                tar -xvf $backup_dir/$file -C "/home/$(whoami)"
                                 exit 1
                         else
                                 echo "File dosent exist"
