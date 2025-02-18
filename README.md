@@ -1,2 +1,2 @@
 # Scirpts 
-That's scripts alows to create user manualy oraz from file. Also there is one script that can help you delete users from system, before you need a txt file named: "users.txt".
+Simple Scripts for learning my skills in Bash, maybe in one day I will be a SysOps with DevOps and Cloud :D
